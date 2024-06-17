@@ -128,6 +128,7 @@ esac
 set +x
 case $compilerName in
     gnu   ) CC=gcc ;;
+    gnu9  ) CC=gcc ;;
     intel ) CC=icc ;;
     clang ) CC=clang ;;
     *     ) echo "Invalid compiler option = $compilerName, ABORT!"; exit 1 ;;

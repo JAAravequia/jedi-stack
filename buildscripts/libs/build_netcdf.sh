@@ -14,6 +14,7 @@ cxx_version=$3
 compiler=$(echo $JEDI_COMPILER | sed 's/\//-/g')
 mpi=$(echo $JEDI_MPI | sed 's/\//-/g')
 
+echo "MODULES = "$MODULES
 if $MODULES; then
     set +x
     source $MODULESHOME/init/bash
@@ -21,6 +22,7 @@ if $MODULES; then
     [[ -z $mpi ]] || module load jedi-$JEDI_MPI 
     module try-load szip
     module load hdf5
+    module try-load curl-7.85.0-gcc-11.2.0-yxw2lyk
     [[ -z $mpi ]] || module load pnetcdf
     module list
     set -x
@@ -56,7 +58,14 @@ gitURLroot="https://github.com/Unidata"
 cd ${JEDI_STACK_ROOT}/${PKGDIR:-"pkg"}
 curr_dir=$(pwd)
 
-export LDFLAGS+=" -L$HDF5_ROOT/lib -L$SZIP_ROOT/lib"
+export LDFLAGS+=" -L$HDF5_ROOT/lib -L$SZIP_ROOT/lib -L$curl/lib"
+export CPPFLAGS+=" -I$curl/include "
+export CXXFLAGS+=" $CPPFLAGS"
+
+# export PATH+=":$pnetcdf/bin"
+# export LDFLAGS+=" -L$HDF5/lib -L$SZIP_DIR/lib -L$curl/lib -L$pnetcdf/lib"
+# export CPPFLAGS+=" -I$SZIP_DIR/include -I$HDF5/include "
+
 
 cd $curr_dir
 

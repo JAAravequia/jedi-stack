@@ -22,7 +22,7 @@ if $MODULES; then
     module try-load cmake
     module try-load ecbuild
     module load netcdf
-    module try-load eckit
+    module try-load eckit/ecmwf-$ver_ec
     module list
     set -x
 

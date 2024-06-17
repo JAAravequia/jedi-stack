@@ -79,6 +79,7 @@ if [ -z $boost_root ]; then
     compName=$(echo $compiler | cut -d- -f1)
     case "$compName" in
         gnu   ) toolset=gcc ;;
+        gnu9   ) toolset=gcc ;;
         intel ) toolset=intel ;;
         clang ) toolset=clang ;;
         *     ) echo "Unknown compiler = $compName, ABORT!"; exit 1 ;;

@@ -37,7 +37,7 @@
 #
 
 # currently supported options
-supported_options=("ubuntu/18.04","cheyenne","orion","egeon","rhel7emc","gentoo")
+supported_options=("ubuntu/18.04","cheyenne","orion","egeon-intel","egeon-gnu","rhel7emc","gentoo")
 
 JEDI_BUILDSCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
@@ -142,8 +142,15 @@ case $1 in
 
     ;;
 #==========================================================================================
-"egeon")
-    export JEDI_OPT="$HOME/opt"
+"egeon-intel")
+    export JEDI_OPT="/mnt/beegfs/$USER/opt"
+    echo "export JEDI_OPT=$JEDI_OPT" >> $HOME/.bashrc
+    echo "module use $JEDI_OPT/modulefiles/core" >> $HOME/.bashrc
+
+    ;;
+#==========================================================================================
+"egeon-gnu")
+    export JEDI_OPT="/mnt/beegfs/$USER/opt-gnu"
     echo "export JEDI_OPT=$JEDI_OPT" >> $HOME/.bashrc
     echo "module use $JEDI_OPT/modulefiles/core" >> $HOME/.bashrc
 

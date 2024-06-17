@@ -69,6 +69,7 @@ cd $BoostRoot/tools/build
 compName=$(echo $compiler | cut -d- -f1)
 case "$compName" in
     gnu   ) MPICC=$(which mpicc)  ; toolset=gcc ;;
+    gnu9   ) MPICC=$(which mpicc)  ; toolset=gcc ;;
     intel ) MPICC=$(which mpiicc) ; toolset=intel ;;
     clang ) MPICC=$(which mpiicc) ; toolset=clang ;;
     *     ) echo "Unknown compiler = $compName, ABORT!"; exit 1 ;;

@@ -32,7 +32,8 @@ cd $JEDI_STACK_ROOT/${PKGDIR:-"pkg"}
 
 software="$name-$version"
 tarfile="$version.tar.gz"
-url="https://github.com/pboettch/json-schema-validator/archive/$tarfile"
+# url="https://github.com/pboettch/json-schema-validator/archive/$tarfile"
+url="https://github.com/pboettch/json-schema-validator/archive/refs/tags/$tarfile"
 [[ -d $software ]] || ( $WGET $url; tar -xf $tarfile )
 [[ ${DOWNLOAD_ONLY} =~ [yYtT] ]] && exit 0
 [[ -d $software ]] && cd $software || ( echo "$software does not exist, ABORT!"; exit 1 )
