@@ -34,12 +34,12 @@ fi
 
 cd ${JEDI_STACK_ROOT}/buildscripts/libs/NCEPlibs
 rm -f *.a
-rm macros.make
+#rm macros.make
 
-if [[ $(echo $compiler | cut -d- -f1) = "gnu" ]]; then
-    ln -s macros.make.cheyenne.gnu macros.make
+if [[ $(echo $compiler | cut -d- -f1) = "gnu9" ]]; then
+    ln -sf macros.make.egeon.gnu macros.make
 elif [[ $(echo $compiler | cut -d- -f1) = "intel" ]]; then
-    ln -s macros.make.aws.intel macros.make
+    ln -sf macros.make.aws.intel macros.make
 fi
 make
 

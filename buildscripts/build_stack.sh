@@ -81,7 +81,7 @@ $MODULES && (set +x;  source $MODULESHOME/init/bash; module purge; set -x)
 # - should add a check at some point to see if they are already there.
 # this can be done in each script individually
 # it might warrant a --force flag to force rebuild when desired
-build_lib CMAKE cmake 3.24.3
+build_lib CMAKE cmake 3.30.2  ## 3.24.3
 build_lib UDUNITS udunits 2.2.28
 build_lib JPEG jpeg 9.1.0
 build_lib ZLIB zlib 1.2.11
@@ -122,17 +122,21 @@ export curl=/opt/spack/opt/spack/linux-rhel8-zen2/gcc-11.2.0/curl-7.85.0-yxw2lyk
 export PATH=$pnetcdf/bin:$PATH
 # export CPPFLAGS="-I$pnetcdf/include -I$HDF5/include -I$curl/../include $CPPFLAGS"
 # export LDFLAGS="$LDFLAGS -L$pnetcdf/lib -lpnetcdf -L$HDF5/lib -lhdf5_hl -lhdf5 -lm -L$curl/lib -lcurl" 
-build_lib NETCDF netcdf 4.7.4 4.5.3 4.3.0
+build_lib NETCDF netcdf 4.9.2 4.6.1 4.3.1 ## 4.7.4 4.5.3 4.3.0
 export netcdf=$PREFIX/$compiler/$mpi/netcdf/4.7.4
 export PATH=$netcdf/bin:$PATH
 export CPPFLAGS+=" -I$netcdf/include "
 export LDFLAGS=" -L$netcdf/lib $LDFLAGS" 
 build_lib NCCMP nccmp 1.8.7.0
 
-###           mpas-bundle 2.0.0  >>>  rel. 1.0.0   ##  rel. 2.0.0  ##  oops @develop may24
-export ver_ec=1.23.0              ##  1.16.0       ## "1.18.2"     ##   1.24.4    
-export ver_fc=0.9.5               ##  0.9.2        ## "0.9.5"      ##   0.11.0 
-export ver_atlas=0.31.1           ##  0.24.1       ## "0.29.0"     ##   0.35.0
+## Below modules are needed to build eckit with support to sql, that is needed to build ODC
+module load bison-3.8.2-gcc-9.4.0-3aqkcam
+module load flex-2.6.3-gcc-9.4.0-mmfldgl
+
+###                      mpas-bundle 2.0.0  >>>  rel. 1.0.0   ##  rel. 2.0.0  ##  oops @develop may24
+export ver_ec=1.24.4     ## 1.23.0           ##  1.16.0       ## "1.18.2"     ##   1.24.4    
+export ver_fc=0.11.0     ## 0.9.5            ##  0.9.2        ## "0.9.5"      ##   0.11.0 
+export ver_atlas=0.36.0  ## 0.31.1           ##  0.24.1       ## "0.29.0"     ##   0.36.0
 
 build_lib ECKIT eckit ecmwf $ver_ec   ##  1.16.0 ## 
 export PATH=$PREFIX/$compiler/$mpi/eckit/ecmwf-$ver_ec/bin:$PATH
@@ -141,8 +145,7 @@ export PATH=$PREFIX/$compiler/$mpi/fckit/ecmwf-$ver_fc/bin:$PATH
 build_lib FFTW fftw 3.3.8
 build_lib ATLAS atlas ecmwf  $ver_atlas ## 0.35.0  ## 0.24.1
 build_lib ODB odb 0.18.1.r2
-build_lib ODC odc ecmwf 2021.03.0
-
+build_lib ODC odc ecmwf 1.5.2 # 1.4.6
 # ===============================================================================
 # Optional Extensions to the JEDI Stack
 
@@ -172,10 +175,10 @@ build_lib ECFLOW ecflow ecmwf 5.5.3 boost 1.68.0
 build_lib GPTL gptl 8.0.3
 build_lib NCO nco 4.9.9
 export NetCDF_ROOT=$netcdf
-build_lib PIO pio 2.5.1
+build_lib PIO pio 2.6.2 # 2.5.1
 build_lib BOOST_FULL boost 1.68.0
-build_lib ESMF esmf 8_0_1
-build_lib BASELIBS baselibs 6.2.13
+build_lib ESMF esmf v8.6.0
+build_lib BASELIBS baselibs v6.2.13
 build_lib PDTOOLKIT pdtoolkit 3.25.1
 build_lib TAU2 tau2 3.25.1
 build_lib FMS fms jcsda release-stable

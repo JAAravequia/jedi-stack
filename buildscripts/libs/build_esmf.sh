@@ -72,6 +72,8 @@ if [[ $ESMF_COMPILER = "intel" ]]; then
   export ESMF_CXXCOMPILEOPTS="-g -traceback -fp-model precise"
 elif [[ $ESMF_COMPILER = "gnu" ]]; then
   export ESMF_COMPILER="gfortran"
+elif [[ $ESMF_COMPILER = "gnu9" ]]; then
+  export ESMF_COMPILER="gfortran"
 fi
 
 export ESMF_CXXCOMPILER=$CXX
@@ -95,7 +97,7 @@ gitURL="https://github.com/esmf-org/esmf"
 cd ${JEDI_STACK_ROOT}/${PKGDIR:-"pkg"}
 
 software="ESMF_$version"
-[[ -d $software ]] || ( git clone -b $software $gitURL $software )
+[[ -d $software ]] || ( git clone -b $version $gitURL $software )
 [[ ${DOWNLOAD_ONLY} =~ [yYtT] ]] && exit 0
 [[ -d $software ]] && cd $software || ( echo "$software does not exist, ABORT!"; exit 1 )
 export ESMF_DIR=$PWD

@@ -34,7 +34,8 @@ export FC=$MPI_FC
 export CC=$MPI_CC
 export CXX=$MPI_CXX
 
-gitURL="https://developer.nasa.gov/GMAO/ESMA-Baselibs.git"
+# gitURL="https://developer.nasa.gov/GMAO/ESMA-Baselibs.git"
+gitURL="https://github.com/GEOS-ESM/ESMA-Baselibs.git" 
 
 cd ${JEDI_STACK_ROOT}/${PKGDIR:-"pkg"}
 
@@ -49,6 +50,7 @@ mpiN=$(echo $mpi | sed 's/-/\//g')
 
 case "$mpiN" in
     openmpi ) ESMF_COMM="openmpi" ;;
+    openmpi4/4.1.1 ) ESMF_COMM="openmpi" ;;
     mpich   ) ESMF_COMM="mpich2" ;;
     *       ) echo "Invalid option for MPI = $name, ABORT!"; exit 1 ;;
 esac

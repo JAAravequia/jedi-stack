@@ -23,6 +23,7 @@ if $MODULES; then
     module try-load szip
     module load hdf5
     module try-load curl-7.85.0-gcc-11.2.0-yxw2lyk
+    module try-load libxml2-2.10.1-gcc-11.2.0-qxbu3gk
     [[ -z $mpi ]] || module load pnetcdf
     module list
     set -x
@@ -57,9 +58,12 @@ gitURLroot="https://github.com/Unidata"
 
 cd ${JEDI_STACK_ROOT}/${PKGDIR:-"pkg"}
 curr_dir=$(pwd)
-
-export LDFLAGS+=" -L$HDF5_ROOT/lib -L$SZIP_ROOT/lib -L$curl/lib"
-export CPPFLAGS+=" -I$curl/include "
+export lib_xml=`xml2-config --libs | cut -d " " -f1-2`
+echo $lib_xml
+export LDFLAGS+=" -L$HDF5_ROOT/lib -L$SZIP_ROOT/lib -L$curl/lib $lib_xml"
+echo $LDFLAGS
+export xml_root=`xml2-config --prefix`
+export CPPFLAGS+=" -I$curl/include -I$xml_root/include -I$xml_root/include/libxml2"
 export CXXFLAGS+=" $CPPFLAGS"
 
 # export PATH+=":$pnetcdf/bin"

@@ -33,7 +33,7 @@ export DOWNLOAD_ONLY=F
 export STACK_EXIT_ON_FAIL=T
 export WGET="wget -nv"
 #Global compiler flags
-export FFLAGS=""
-export CFLAGS=""
-export CXXFLAGS="-std=c++14"
-export LDFLAGS="-std=c++14"
+export FFLAGS=" -qopenmp"
+export CFLAGS=" -qopenmp"
+export CXXFLAGS="-std=c++14 -qopenmp"
+export LDFLAGS="-std=c++14 -qopenmp"
