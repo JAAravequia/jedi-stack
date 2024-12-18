@@ -50,7 +50,8 @@ export FCFLAGS="$FFLAGS"
 SZIP_ROOT=${SZIP_ROOT:-/usr}
 ZLIB_ROOT=${ZLIB_ROOT:-/usr}
 
-gitURL="https://bitbucket.hdfgroup.org/scm/hdffv/hdf5.git"
+# gitURL="https://bitbucket.hdfgroup.org/scm/hdffv/hdf5.git"
+gitURL="https://github.com/HDFGroup/hdf5.git"
 
 cd ${JEDI_STACK_ROOT}/${PKGDIR:-"pkg"}
 

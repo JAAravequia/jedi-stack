@@ -21,6 +21,7 @@ if $MODULES; then
   module load jedi-$JEDI_COMPILER
   module load jedi-$JEDI_MPI
   module load netcdf
+  module load ecbuild
   module list
   set -x
 
