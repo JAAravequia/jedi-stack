@@ -3,6 +3,8 @@
 # This software is licensed under the terms of the Apache Licence Version 2.0 which can be obtained at
 # http://www.apache.org/licenses/LICENSE-2.0.
 
+# OBS.: To build the value should be on char of: yYtT
+
 # Minimal JEDI Stack
 export      STACK_BUILD_CMAKE=N  # Y
 export     STACK_BUILD_GITLFS=N  # Y
@@ -51,3 +53,5 @@ export           STACK_BUILD_FMS=Y  # Y
 export          STACK_BUILD_JSON=Y  # Y
 export STACK_BUILD_JSON_SCHEMA_VALIDATOR=Y  # Y
 export        STACK_BUILD_ECFLOW=Y  # Y
+
+export    STACK_BUILD_jedi_cmake=Y

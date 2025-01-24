@@ -182,6 +182,7 @@ build_lib BASELIBS baselibs v6.2.13
 build_lib PDTOOLKIT pdtoolkit 3.25.1
 build_lib TAU2 tau2 3.25.1
 build_lib FMS fms jcsda release-stable
+build_lib jedi_cmake jedi-cmake 1.2.0
 
 # ===============================================================================
 # optionally clean up
