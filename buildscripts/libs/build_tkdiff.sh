@@ -25,8 +25,9 @@ cd ${JEDI_STACK_ROOT}/${PKGDIR:-"pkg"}
 
 software=tkdiff-$(echo $version | sed 's/\./-/g')
 url="https://sourceforge.net/projects/tkdiff/files/tkdiff/$version/$software.zip"
-[[ -d $software ]] || ($WGET $url; unzip $software.zip)
+[[ -d $software ]] || ($WGET $url)
 [[ ${DOWNLOAD_ONLY} =~ [yYtT] ]] && exit 0
+unzip -o $software.zip
 $SUDO mkdir -p $prefix/bin
 $SUDO mv $software/tkdiff $prefix/bin
 

@@ -37,3 +37,6 @@ export FFLAGS=" -qopenmp"
 export CFLAGS=" -qopenmp"
 export CXXFLAGS="-std=c++14 -qopenmp"
 export LDFLAGS="-std=c++14 -qopenmp"
+export MPI_CC=mpicc
+export MPI_CXX=mpic++
+export MPI_FC=mpifort

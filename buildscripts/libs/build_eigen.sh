@@ -8,6 +8,8 @@ set -ex
 name="eigen"
 version=$1
 
+echo "@ EIGEN - FFTW :" $FFTW_INCLUDES"   " $FFTW_LIBRARIES
+
 # this is only needed if MAKE_CHECK is enabled
 if $MODULES; then
     set +x
@@ -39,7 +41,7 @@ url="https://gitlab.com/libeigen/eigen/-/archive/$version/$tarfile"
 [[ -d build ]] && rm -rf build
 mkdir -p build && cd build
 
-cmake .. -DCMAKE_INSTALL_PREFIX=$prefix
+cmake .. -DCMAKE_INSTALL_PREFIX=$prefix -DFFTW3_INCLUDE_DIR=$FFTW_INCLUDES -DFFTW3_LIBRARY=$FFTW_LIBRARIES
 [[ $MAKE_CHECK =~ [yYtT] ]] && make check
 $SUDO make install
 

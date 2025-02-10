@@ -6,6 +6,9 @@
 
 module swap gnu9 intel/2021.4.0
 module swap openmpi4 impi/2021.4.0
+# 
+# library in clck has GLIBCXX 3.4.26 (needed to build cmake)
+module load clck/2021.6.0
 
 source /opt/intel/oneapi/mkl/2021.4.0/env/vars.sh
 
@@ -15,7 +18,7 @@ module load python-3.9.13-gcc-9.4.0-moxjnc6
 
 module load curl-7.85.0-gcc-11.2.0-yxw2lyk
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/oneapi/clck/2021.4.0/lib_common/intel64
 
 # module load openssl-1.1.1q-gcc-9.4.0-6zaz2vm
 # export  OPENSSL_ROOT_DIR=/home/public/spack/opt/spack/linux-rhel8-zen2/gcc-9.4.0/openssl-1.1.1q-6zaz2vmcy666hqsqrrvxru4damhk7soo
@@ -23,22 +26,16 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64
 export JEDI_COMPILER=intel/2021.4.0 
 export JEDI_MPI=impi/2021.4.0
 
-# export JEDI_COMPILER=gnu9/9.4.0 
-# export JEDI_MPI=openmpi/4.1.1
-
 export JEDI_OPT=/mnt/beegfs/jose.aravequia/opt
 ###    PASSOS FEITOS :
- [buildscripts]> $ ./setup_environment.sh egeon
-
-
 # For lmod modules
 ## . /usr/local/opt/lmod/init/profile
 . /opt/ohpc/admin/lmod/lmod/init/profile
 
-./setup_environment.sh egeon-intel
+### Habilite a linha abaixo só acrescenta algumas linhas no .bashrc
+### ./setup_environment.sh egeon-intel
 
 ## para ler os modulos do core:
-module use
 module use -a $JEDI_OPT/modulefiles/core
 
 ### Cria os modulos básicos associados ao compilador e mpi
@@ -50,7 +47,6 @@ module use -a $JEDI_OPT/modulefiles/core
 ### APOS COMPILAÇAO COMPLETA :: 
 
 module load jedi-intel/2021.4.0
-module load jedi-impi/2021.4.0
 
 module use -a $JEDI_OPT/modulefiles/mpi/intel/2021.4.0/impi/2021.4.0
 module use -a $JEDI_OPT/modulefiles/compiler/intel/2021.4.0

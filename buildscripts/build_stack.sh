@@ -71,6 +71,7 @@ mkdir -p $logdir
 # compiler compose  instalation path name to export ENV variables needed in compilations
 compiler=$(echo $JEDI_COMPILER | sed 's/\//-/g')
 mpi=$(echo $JEDI_MPI | sed 's/\//-/g')
+# ==============================================================================
 
 # ===============================================================================
 # Minimal JEDI Stack
@@ -93,7 +94,6 @@ build_lib PNG png 1.6.35
 build_lib SZIP szip 2.1.1
 # export SZIP_ROOT=$PREFIX/$compiler/szip/2.1.1
 # export SZIP_DIR=$SZIP_ROOT
-
 build_lib GMP gmp 6.2.1
 GMP_DIR=${JEDI_OPT}/$compiler/gmp/6.2.1 
 export GMP_INC=$GMP_DIR/include
@@ -112,14 +112,15 @@ build_lib BOOST_HDRS boost 1.84.0 headers-only
 # export BOOST_DIR=$PREFIX/core/boost/1.68.0
 
 ## needed to build eigen with fftw support
+
+build_lib FFTW fftw 3.3.10
+FFTW_DIR=${JEDI_OPT}/$compiler/$mpi/fftw/3.3.10
 export FFTW_INCLUDES=${FFTW_DIR}/include
 export FFTW_LIBRARIES=${FFTW_DIR}/lib
-build_lib FFTW fftw 3.3.10
-
 ver_eig=3.4.0   ## For Release 1.0.0 use >>>   3.3.7
 build_lib EIGEN3 eigen $ver_eig
 # build_lib BUFR bufr noaa-emc 11.5.0
-build_lib BUFR bufr noaa-emc 12.1.0
+build_lib BUFR bufr noaa-emc 11.6.0   # v12.1.0
 build_lib ECBUILD ecbuild ecmwf 3.8.4   ## 3.6.1
 build_lib CGAL cgal 5.0.4
 build_lib GITLFS git-lfs 2.11.0
@@ -127,7 +128,7 @@ build_lib GSL_LITE gsl_lite 0.37.0
 build_lib PYBIND11 pybind11 2.11.0
 #----------------------
 # These must be rebuilt for each MPI implementation
-build_lib HDF5 hdf5 1.14.3       ## 1.12.0
+build_lib HDF5 hdf5 1.12.0  #  1.14.3       ## 1.12.0
 build_lib PNETCDF pnetcdf 1.12.1
 
 export pnetcdf=$PREFIX/$compiler/$mpi/pnetcdf/1.12.1
@@ -184,6 +185,9 @@ if [ ! -L $json/lib ]; then
 fi
 
 build_lib JSON_SCHEMA_VALIDATOR json-schema-validator 2.1.0
+
+build_lib qhull qhull 8.0.2 ## Ecflow try to find qhull
+
 build_lib ECFLOW ecflow ecmwf 5.5.3 boost 1.68.0
 
 #----------------------
@@ -199,7 +203,6 @@ build_lib PDTOOLKIT pdtoolkit 3.25.1
 build_lib TAU2 tau2 3.25.1
 build_lib FMS fms jcsda release-stable
 build_lib jedi_cmake jedi-cmake 1.4.0
-build_lib qhull qhull 8.0.2
 
 # ===============================================================================
 # optionally clean up

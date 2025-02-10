@@ -17,15 +17,13 @@ export JEDI_MPI=openmpi4/4.1.1
 # export JEDI_COMPILER=gnu9/9.4.0 
 # export JEDI_MPI=openmpi/4.1.1
 
-export JEDI_OPT=/mnt/beegfs/jose.aravequia/opt-new
+export JEDI_OPT=/mnt/beegfs/jose.aravequia/opt-gnu
 ###    PASSOS FEITOS :
- [buildscripts]> $ ./setup_environment.sh egeon-gnu
-
-
 # For lmod modules
 ## . /usr/local/opt/lmod/init/profile
 . /opt/ohpc/admin/lmod/lmod/init/profile
-
+#
+# o passo abaixo escreve no .bashrc (nem sempre eh necessario)
 ./setup_environment.sh egeon-gnu
 
 ## para ler os modulos do core:
@@ -34,6 +32,9 @@ module use $JEDI_OPT/modulefiles/core
 
 ### Cria os modulos básicos associados ao compilador e mpi
 ./setup_modules.sh egeon-gnu
+
+## make MKL avail    USING GMP and MPFR instead MKL 
+###   source /opt/intel/oneapi/mkl/2022.1.0/env/vars.sh
 
 ## compila as bibliotecas e apps , e gera modulos 
 ./build_stack.sh egeon-gnu
@@ -62,6 +63,6 @@ export Eigen3_DIR=$EIGEN3_PATH               # Path to directory containing Eige
 export FFTW_PATH=$FFTW_DIR
 export Qhull_DIR=/mnt/beegfs/jose.aravequia/opt-gnu/gnu9-9.4.0/openmpi4-4.1.1/qhull
 ##               /mnt/beegfs/jose.aravequia/opt/intel-2021.4.0/impi-2021.4.0/qhull
-export nlohmann_json_DIR=/mnt/beegfs/jose.aravequia/opt/core/json/3.9.1/include/nlohmann
+export nlohmann_json_DIR=/mnt/beegfs/jose.aravequia/opt-gnu/core/json/3.9.1/include/nlohmann
 export CODE=$JEDI_SRC
 export BUILD=$JEDI_BUILD

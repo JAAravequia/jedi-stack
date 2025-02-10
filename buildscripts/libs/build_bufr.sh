@@ -23,7 +23,7 @@ if $MODULES; then
     module list
     set -x
 
-    prefix="${PREFIX:-"/opt/modules"}/$compiler/$name/$source-$version"
+    prefix="${PREFIX:-"/opt/modules"}/$compiler/$name/$source/$version"
     if [[ -d $prefix ]]; then
     [[ $OVERWRITE =~ [yYtT] ]] && ( echo "WARNING: $prefix EXISTS: OVERWRITING!";$SUDO rm -rf $prefix ) \
                                    || ( echo "WARNING: $prefix EXISTS, SKIPPING"; exit 1 )
@@ -40,13 +40,19 @@ export CC=$SERIAL_CC
 software=NCEPLIBS-bufr
 
 # Release git tag name
+numversion=$(echo $version | cut -d'.' -f1-2 )$(echo $version |cut -d'.' -f3)
+
 if [[ ${source} == "jcsda-internal" ]]
 then
-  gitOrg="jcsda-internal"
-  tag=$version
+  gitOrg="JCSDA-internal"
 else
   gitOrg="${source}"
-  tag=bufr_v$version
+fi
+
+if (( $(echo "$numversion <= 12.0" | bc -l) )); then
+    tag=bufr_v$version      ### up to version 12.0.0
+else
+    tag=v$version           ### after 12.0.0
 fi
 
 cd ${JEDI_STACK_ROOT}/${PKGDIR:-"pkg"}

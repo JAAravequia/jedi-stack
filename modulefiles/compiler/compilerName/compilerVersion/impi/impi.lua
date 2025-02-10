@@ -17,13 +17,13 @@ family("mpi")
 conflict(pkgName)
 conflict("mpich","openmpi")
 
-always_load("intel/17.0.1")
-prereq("intel/17.0.1")
+always_load("intel/2021.4.0")
+prereq("intel/2021.4.0")
 
 try_load("szip")
 
 local opt = os.getenv("JEDI_OPT") or os.getenv("OPT") or "/opt/modules"
-local base = "/opt/intel17/compilers_and_libraries_2017.1.132"
+local base = "/opt/intel/oneapi/mpi/2021.4.0"
 
 setenv("I_MPI_ROOT", pathJoin(base,"linux/mpi"))
 setenv("MPI_ROOT", pathJoin(base,"linux/mpi"))

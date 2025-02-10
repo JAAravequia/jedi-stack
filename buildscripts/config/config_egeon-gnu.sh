@@ -37,3 +37,6 @@ export FFLAGS=""
 export CFLAGS=""
 export CXXFLAGS=""
 export LDFLAGS=""
+export MPI_CC=mpicc
+export MPI_CXX=mpic++
+export MPI_FC=mpifort
